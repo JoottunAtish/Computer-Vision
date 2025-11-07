@@ -7,9 +7,11 @@ from project.lab7.imageStitchDemo import *
 def main():
     
     ## Lab 4
-    # sobelDemo(weight=0.4, ksize=1, path="imgs\lab4\house.jpg")
-    # liveCameraSobel(sf=0.5)
-    # liveCameraLapacian(sf=0.5)
+    # sobelDemo(weight=0.4, ksize=1, fileName="house.jpg")
+    # liveCameraSobel(sf=0.3)
+    # liveCameraLapacian(sf=0.3)
+    
+    
     
     ## Lab 5
     # cannydemo()
@@ -17,12 +19,16 @@ def main():
     # autoCanny()
     # liveCameraCanny(0.3)
     
+    
+    
     ## Lab 6
-    # HoughLineDemo("sudoku2.png")
-    # print("Error") if liveCaptureHoughLine() == -1 else None
+    # houghLineDemo("sudoku2.png")
+    # print("Error") if liveCaptureHoughLine(sf=0.3) == -1 else None
     
     # houghCircleDemo()
-    # HoughCircleVarDemo("brown-eyes.jpg")
+    # houghCircleVarDemo("brown-eyes.jpg")
+    
+    
     
     ## Lab 7 
     # cornerDetectionDemo()
@@ -34,6 +40,7 @@ def main():
     
     # contourDemo("ferrari-spider.jpg")
     # liveCaptureContours()
+    
     
     # imageStitchDemo(dirName="sedona_left", sf=0.6)
     

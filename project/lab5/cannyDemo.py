@@ -1,3 +1,15 @@
+'''
+## @File CannyDemo.py
+
+Lab 5 - Canny edge detection
+
+### @Functions:
+    - cannydemo(fileName: str)
+    - cannyVarVal(fileName: str)
+    - autoCanny(fileName: str)
+    - liveCameraCanny(sf:float)
+'''
+
 import cv2 as cv
 from matplotlib import pyplot as plt
 import numpy as np
@@ -38,6 +50,7 @@ def cannyVarVal(fileName: str = "plate.jpg"):
         cv.imshow("Canny Edges", canny_edge)
 
         if cv.waitKey(1) & 0xFF == ord("q"):
+            cv.destroyAllWindows()
             break
 
 
@@ -69,6 +82,7 @@ def autoCanny(fileName: str = "plate.jpg"):
 
     cv.imshow("Edges", np.hstack([wide, tight, auto]))
     cv.waitKey(0)
+    cv.destroyAllWindows()
 
 
 def liveCameraCanny(sf: float = 0.5):
@@ -119,6 +133,7 @@ def liveCameraCanny(sf: float = 0.5):
 
         if cv.waitKey(1) & 0xFF == ord("q"):
             capture.release()
+            cv.destroyAllWindows()
             break
 
 

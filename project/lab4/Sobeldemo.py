@@ -1,3 +1,15 @@
+'''
+## @File Sobeldemo.py
+
+Lab 4 - Sobel Tranformation for Edge Detection
+
+
+### @Functions:
+    - sobelDemo(fileName: str, ksize: int, weight: int)
+    - liveCameraSobel(sf: float)
+    - liveCameraLapacian(sf: float)
+'''
+
 import cv2 as cv
 import numpy as np
 
@@ -17,7 +29,7 @@ def sobelDemo(fileName: str = "Lena.jpg", ksize: int = 3, weight: int = 0.5):
 
     ## Pre-Processing stage
     img = cv.GaussianBlur(img, (3, 3), 0)
-    # cv.imshow("gaussian Blur, Lena", img)
+    
     img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     cv.imshow("Grayscale image of Lena", img)
 
@@ -74,6 +86,7 @@ def liveCameraSobel(sf: float = 0.5):
         frame = cv.resize(
             frame, None, fx=sf, fy=sf, interpolation=cv.INTER_LINEAR
         )  # resize the frame capture.
+        frame_og = frame.copy()
 
         frame = cv.GaussianBlur(frame, (3, 3), 0)
 
@@ -81,12 +94,12 @@ def liveCameraSobel(sf: float = 0.5):
         eq_frame = cv.equalizeHist(gray_frame)
 
         # Sobel convolution
-        sobelx = cv.Sobel(gray_frame, cv.CV_64F, 1, 0, ksize=5)  # Horizontal edges
-        sobely = cv.Sobel(gray_frame, cv.CV_64F, 0, 1, ksize=5)  # Vertical edges
+        sobelx = cv.Sobel(gray_frame, cv.CV_64F, 1, 0, ksize=3)  # Horizontal edges
+        sobely = cv.Sobel(gray_frame, cv.CV_64F, 0, 1, ksize=3)  # Vertical edges
 
         # Combine both x and y sobel edge into a single image
         magnitude = np.sqrt(sobelx**2 + sobely**2)
-        magnitude_norm = cv.normalize(magnitude, None, 0, 255, cv.NORM_MINMAX, cv.CV_8U)
+        magnitude_norm = cv.normalize(magnitude, None, 0, 150, cv.NORM_MINMAX, cv.CV_8U)
 
         # Display
         cv.imshow("Original Frame", frame)
@@ -95,6 +108,7 @@ def liveCameraSobel(sf: float = 0.5):
 
         if cv.waitKey(1) & 0xFF == ord("q"):
             capture.release()
+            cv.destroyAllWindows()
             break
 
 
@@ -119,6 +133,7 @@ def liveCameraLapacian(sf: float = 0.5):
 
         gray_frame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
         frame_eq = cv.equalizeHist(gray_frame)
+        
         laplacian = cv.Laplacian(frame_eq, cv.CV_64F, ksize=1)
         
         cv.imshow("Original", gray_frame)
@@ -127,4 +142,5 @@ def liveCameraLapacian(sf: float = 0.5):
         
         if cv.waitKey(1) & 0xFF == ord("q"):
             capture.release()
+            cv.destroyAllWindows()
             break

@@ -1,8 +1,20 @@
+'''
+## @File imageStitchDemo.py
+
+Lab 7 - Image Stitching using Features (corners and edge) Detection
+
+### @Function:
+    - imageStitchDemo(dirName: str, sf: float)
+'''
+
 import cv2 as cv
 import numpy as np
 import os
 
 def imageStitchDemo(dirName: str = "bryce_left", sf: float = 0.4):
+    '''
+    Using openCV's Stitcher_create(), it stitches 2 or more images given their features (corners and edges).
+    '''
     path = os.path.join("imgs", "stitch", dirName)
 
     if not os.path.isdir(path):
@@ -28,22 +40,15 @@ def imageStitchDemo(dirName: str = "bryce_left", sf: float = 0.4):
         print("Need at least two valid images to stitch.")
         return -1
 
-    # --- Use OpenCV’s built-in Stitcher (MUCH more reliable) ---
-    print("Using OpenCV's built-in Stitcher for best results...")
+    # create a panorama stitcher 
     stitcher = cv.Stitcher_create(cv.Stitcher_PANORAMA)
     (status, stitched) = stitcher.stitch(imgs)
 
     if status != cv.Stitcher_OK:
         print(f"Stitching failed (error code: {status})")
+        print("No common feature found.")
         return -1
 
-    # Optional crop to remove black borders
-    gray = cv.cvtColor(stitched, cv.COLOR_BGR2GRAY)
-    _, thresh = cv.threshold(gray, 1, 255, cv.THRESH_BINARY)
-    contours, _ = cv.findContours(thresh, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-    if contours:
-        x, y, w, h = cv.boundingRect(contours[0])
-        stitched = stitched[y:y + h, x:x + w]
 
     cv.imshow("Stitched Panorama", stitched)
     cv.waitKey(0)

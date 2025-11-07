@@ -1,9 +1,21 @@
+'''
+## @File houghDemo.py
+
+Lab 6 - Hough Transformation for Line and Circle Detection
+
+### @Functions:
+    - houghLineDemo(fileName: str)
+    - liveCaptureHoughLine(sf: float)
+    - houghCircleDemo(fileName: str)
+    - houghCircleVarDemo(fileName: str)
+'''
+
 import cv2 as cv
 import numpy as np
 import math
 
 
-def HoughLineDemo(fileName: str = "sudoku1.png"):
+def houghLineDemo(fileName: str = "sudoku1.png"):
     img = cv.imread(f"imgs\lab6\{fileName}")
 
     if img is None:
@@ -81,6 +93,7 @@ def HoughLineDemo(fileName: str = "sudoku1.png"):
         cv.imshow("Probabilistic Hough Line Transform", cannyEdge_cpy_Prob)
 
         if cv.waitKey(1) & 0xFF == ord("q"):
+            cv.destroyAllWindows()
             break
 
     pass
@@ -178,6 +191,7 @@ def liveCaptureHoughLine(sf: float = 0.3):
         cv.imshow("Probabilistic Hough Line Transform", cannyEdge_cpy_Prob)
 
         if cv.waitKey(1) & 0xFF == ord("q"):
+            cv.destroyAllWindows()
             break
 
 
@@ -221,7 +235,7 @@ def houghCircleDemo(fileName: str = "coin1.jpg"):
     cv.waitKey(0)
 
 
-def HoughCircleVarDemo(fileName: str = "coin1.jpg"):
+def houghCircleVarDemo(fileName: str = "coin1.jpg"):
     img = cv.imread(f"imgs\lab6\{fileName}")
     if img is None:
         print("ERROR: Could not open file")
@@ -282,6 +296,7 @@ def HoughCircleVarDemo(fileName: str = "coin1.jpg"):
         cv.imshow(f"Hough Circle Detection", img_cpy_1 )
         
         if cv.waitKey(1) & 0xFF == ord("q"):
+            cv.destroyAllWindows()
             break
         
         
