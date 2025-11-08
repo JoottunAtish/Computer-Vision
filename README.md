@@ -1,14 +1,10 @@
-You got it\! Here is the improved README in clear Markdown format, ready to be copied into your project:
-
------
-
-# 👁️ Computer Vision Assignments
+# Computer Vision Assignments
 
 A repository containing selected laboratory assignments focused on **fundamental computer vision techniques** implemented using Python.
 
 -----
 
-## 📘 Selected Laboratory Assignments
+## Selected Laboratory Assignments
 
 These labs cover essential topics in image processing and feature detection:
 
@@ -18,12 +14,12 @@ These labs cover essential topics in image processing and feature detection:
       * Focus: Implementing the **Canny algorithm**, a multi-stage approach for optimal edge detection.
   * **Lab 6: Hough Transformation**
       * Focus: Utilizing the **Hough Transform** for detecting **lines and circles** in images.
-  * **Lab 7: Harris Corner Detection**
+  * **Lab 7: Harris Corner Detection and Contour detection**
       * Focus: Implementing the **Harris algorithm** to identify distinctive **corners** (interest points) in an image.
 
 -----
 
-## 🛠️ Installation and Setup
+## Installation and Setup
 
 This project uses **UV**, a fast Python package installer and resolver, for dependency management.
 
@@ -51,6 +47,9 @@ uv sync
 
 -----
 
-## ▶️ Usage
+## Usage
 
-To run a specific lab script (e.g., `lab_4_sobel.py`), first ensure your virtual environment is active, and then execute the file using Python.
+To  run the program, simply run the command below on the root directory.
+```bash
+uv run main.py
+```
