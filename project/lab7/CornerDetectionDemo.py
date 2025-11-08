@@ -212,6 +212,8 @@ def contourDemo(fileName: str = "furniture.jpg"):
         minVal = cv.getTrackbarPos("Min Thres", windowName)
         maxVal = cv.getTrackbarPos("Max Thres", windowName)
         ret, threshold = cv.threshold(imgGray, minVal, maxVal, cv.THRESH_BINARY_INV)
+        
+        threshold = cv.GaussianBlur(threshold, (3, 3), 0)
 
         (contours, hierarchy) = cv.findContours(
             threshold, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE
@@ -219,7 +221,7 @@ def contourDemo(fileName: str = "furniture.jpg"):
 
         img_cpy = img.copy()
 
-        cv.drawContours(img_cpy, contours, -1, (0, 0, 225), 2, cv.LINE_AA)
+        cv.drawContours(img_cpy, contours, -1, (0, 0, 225), 1, cv.LINE_AA)
 
         cv.imshow(
             "contours", np.hstack([cv.cvtColor(threshold, cv.COLOR_GRAY2BGR), img_cpy])

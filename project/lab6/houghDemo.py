@@ -43,50 +43,46 @@ def houghLineDemo(fileName: str = "sudoku1.png"):
 
         cannyEdge_cpy_col = cv.cvtColor(cannyEdge_cpy, cv.COLOR_GRAY2BGR)
         cannyEdge_cpy_Prob = np.copy(cannyEdge_cpy_col)
-
-        lines = cv.HoughLines(
-            cannyEdge_cpy,  # The edge Detected using Canny Detection
-            1,  # Rho: The Resolution of Parameter r. We used a resolution of 1 pixel
-            np.pi
-            / 180,  # theta: The resolution of parameter θ in radian. We used 1 degrees (pi / 180 = 1 deg)
-            150,  # Threshold: The number of intersection required to have a line.
-            None,  # Lines: Is set to None
-            0,  # srn
-            0,  # stn
-        )
-
-        if lines is None:
-            print("No Lines could be detected.")
-            return -1
-
-        for i in range(0, len(lines)):
-            rho = lines[i][0][0]
-            theta = lines[i][0][1]
-            a = math.cos(theta)
-            b = math.sin(theta)
-            x0 = a * rho
-            y0 = b * rho
-            pt1 = (int(x0 + 1000 * (-b)), int(y0 + 1000 * (a)))
-            pt2 = (int(x0 - 1000 * (-b)), int(y0 - 1000 * (a)))
-
-            cv.line(cannyEdge_cpy_col, pt1, pt2, (0, 0, 225), 1, cv.LINE_AA)
-
-        linesProb = cv.HoughLinesP(cannyEdge_cpy, 1, np.pi / 180, 50, None, 50, 10)
-
-        if linesProb is None:
-            print("could not detect Line Probability!")
-            return -1
-
-        for i in range(0, len(linesProb)):
-            l = linesProb[i][0]
-            cv.line(
-                cannyEdge_cpy_Prob,
-                (l[0], l[1]),
-                (l[2], l[3]),
-                (0, 225, 0),
-                1,
-                cv.LINE_AA,
+        
+        
+        try:
+            lines = cv.HoughLines(
+                cannyEdge_cpy,  # The edge Detected using Canny Detection
+                1,  # Rho: The Resolution of Parameter r. We used a resolution of 1 pixel
+                np.pi
+                / 180,  # theta: The resolution of parameter θ in radian. We used 1 degrees (pi / 180 = 1 deg)
+                150,  # Threshold: The number of intersection required to have a line.
+                None,  # Lines: Is set to None
+                0,  # srn
+                0,  # stn
             )
+
+            for i in range(0, len(lines)):
+                rho = lines[i][0][0]
+                theta = lines[i][0][1]
+                a = math.cos(theta)
+                b = math.sin(theta)
+                x0 = a * rho
+                y0 = b * rho
+                pt1 = (int(x0 + 1000 * (-b)), int(y0 + 1000 * (a)))
+                pt2 = (int(x0 - 1000 * (-b)), int(y0 - 1000 * (a)))
+
+                cv.line(cannyEdge_cpy_col, pt1, pt2, (0, 0, 225), 1, cv.LINE_AA)
+
+            linesProb = cv.HoughLinesP(cannyEdge_cpy, 1, np.pi / 180, 50, None, 50, 10)
+
+            for i in range(0, len(linesProb)):
+                l = linesProb[i][0]
+                cv.line(
+                    cannyEdge_cpy_Prob,
+                    (l[0], l[1]),
+                    (l[2], l[3]),
+                    (0, 225, 0),
+                    1,
+                    cv.LINE_AA,
+                )
+        except:
+            pass
 
         cv.imshow(f"Original Image, {fileName}", cannyEdge)
         cv.imshow("Standard Hough Line Transform", cannyEdge_cpy_col)
@@ -165,14 +161,7 @@ def liveCaptureHoughLine(sf: float = 0.3):
                 cv.line(cannyEdge_cpy_col, pt1, pt2, (0, 0, 225), 1, cv.LINE_AA)
 
             linesProb = cv.HoughLinesP(cannyEdge_cpy, 1, np.pi / 180, 50, None, 50, 10)
-        except:
-            pass  # If no line is detected do nothing
 
-        # if linesProb is None:
-        #     print("could not detect Line Probability!")
-        #     return -1
-
-        try:
             for i in range(0, len(linesProb)):
                 l = linesProb[i][0]
                 cv.line(
@@ -231,8 +220,10 @@ def houghCircleDemo(fileName: str = "coin1.jpg"):
         
     cv.imshow(f"Original image, {fileName}", img_cpy)
     cv.imshow(f"Hough Circle Detection", img)
+    
 
-    cv.waitKey(0)
+    if cv.waitKey(0) & 0xFF == ord('q'):
+        cv.destroyAllWindows()
 
 
 def houghCircleVarDemo(fileName: str = "coin1.jpg"):

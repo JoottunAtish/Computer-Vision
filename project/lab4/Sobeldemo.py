@@ -24,6 +24,7 @@ def sobelDemo(fileName: str = "Lena.jpg", ksize: int = 3, weight: int = 0.5):
     if img is None:
         print(f"Error reading image, `{fileName}`")
         return None
+    
 
     cv.imshow("Default Image, Lena", img)
 
@@ -112,7 +113,7 @@ def liveCameraSobel(sf: float = 0.5):
             break
 
 
-def liveCameraLapacian(sf: float = 0.5):
+def liveCameraLaplacian(sf: float = 0.5):
     capture = cv.VideoCapture(0)
 
     if not capture.isOpened():
