@@ -24,15 +24,21 @@ def sobelDemo(fileName: str = "Lena.jpg", ksize: int = 3, weight: int = 0.5):
     if img is None:
         print(f"Error reading image, `{fileName}`")
         return None
+   
+    h, w, _ = img.shape
     
+    
+    if (w > 1000 or h > 1000):
+        print(f"height: {h}\nWidth: {w}")
+        img = cv.resize(img, None, fx=0.2, fy=0.2, interpolation=cv.INTER_LINEAR) 
 
-    cv.imshow("Default Image, Lena", img)
+    cv.imshow(f"Default Image, {fileName}", img)
 
     ## Pre-Processing stage
     img = cv.GaussianBlur(img, (3, 3), 0)
     
     img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    cv.imshow("Grayscale image of Lena", img)
+    cv.imshow(f"Grayscale of {fileName}", img)
 
     ## Sobel Edge detection
     gradient_x = cv.Sobel(
@@ -61,7 +67,7 @@ def sobelDemo(fileName: str = "Lena.jpg", ksize: int = 3, weight: int = 0.5):
     abs_grad_y = cv.convertScaleAbs(gradient_y)
 
     edgeImg = cv.addWeighted(abs_grad_x, weight, abs_grad_y, weight, 0)
-    cv.imshow("edge detected, Lena", edgeImg)
+    cv.imshow(f"edge detected, {fileName}", edgeImg)
 
     cv.waitKey(0)  # Wait for an input
     cv.destroyAllWindows()  # destroyes all windows after input is detected.

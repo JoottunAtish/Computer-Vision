@@ -75,7 +75,7 @@ def MainMenuList():
     clearTerminal()
     print(
         """
-    -------------------------------------------------------------
+-----------------------------------------------------------------------
     Computer Vision Main Menu Lab 4 - 7
     
     Options:  
@@ -85,7 +85,7 @@ def MainMenuList():
         4 - Corner Detection, Harris Corner Detection and Image stitching Demo      (Lab 7)
         
         q - Quit Program
-    -------------------------------------------------------------
+-----------------------------------------------------------------------
         """
     )
 
@@ -95,7 +95,7 @@ def lab4Menu():
         clearTerminal()
         print(
             """
-        -------------------------------------------------------------
+-----------------------------------------------------------------------
         Lab 4 - Sobel and laplacian demo
         
         Options:
@@ -104,7 +104,7 @@ def lab4Menu():
             3 - Live Camera Laplacian Demo
             
             q - Quit Lab 4 Demo 
-        -------------------------------------------------------------
+-----------------------------------------------------------------------
             """
         )
 
@@ -116,21 +116,23 @@ def lab4Menu():
             img = getImgData("lab4")
             if img is None:
                 sobelDemo()
+            elif img == -1:
+                continue
             else:
                 sobelDemo(img)
-                
+
         elif demoChoice == "2":
             print("Live Camera Sobel Demo")
             liveCameraSobel(sf=0.3)
-            
+
         elif demoChoice == "3":
             print("Live Camera Laplacian Demo")
             liveCameraLaplacian(sf=0.3)
-            
+
         elif demoChoice == "q":
             print("Exiting Lab 4 Demo...")
             break
-        
+
         else:
             print("Invalid Input!!")
 
@@ -140,7 +142,7 @@ def lab5Menu():
         clearTerminal()
         print(
             """
-        -------------------------------------------------------------
+-----------------------------------------------------------------------
         Lab 5 -  Canny Edge Detection Demo
 
             Options:
@@ -150,7 +152,7 @@ def lab5Menu():
             4 - Live Camera Canny Demo
             
             q - Quit Lab 5 Demo
-        -------------------------------------------------------------
+-----------------------------------------------------------------------
             """
         )
 
@@ -162,35 +164,41 @@ def lab5Menu():
             img = getImgData("lab5")
             if img is None:
                 cannydemo()
+            elif img == -1:
+                continue
             else:
                 cannydemo(img)
-                
+
         elif demoChoice == "2":
             print("Canny with Variable Threshold Demo")
 
             img = getImgData("lab5")
             if img is None:
                 cannyVarVal()
+            elif img == -1:
+                continue
             else:
                 cannyVarVal(img)
-                
+
         elif demoChoice == "3":
             print("Canny with Auto detection Demo")
 
             img = getImgData("lab5")
             if img is None:
                 autoCanny()
+            elif img == -1:
+                continue
             else:
                 autoCanny(img)
-                
+
         elif demoChoice == "4":
             print("Live Camera Canny Demo")
             liveCameraCanny(sf=0.3)
-            
+
         elif demoChoice == "q":
             print("Exiting Lab 5 Demo...")
             break
-        
+
         else:
             print("Invalid Input!!")
 
@@ -200,7 +208,7 @@ def lab6Menu():
         clearTerminal()
         print(
             """
-        -------------------------------------------------------------
+-----------------------------------------------------------------------
         Lab 6 - Hough tranformation Line and Circle Demo
         
         Options:
@@ -210,7 +218,7 @@ def lab6Menu():
             4 - Hough Circle with Variable Threshold Demo (default image, `coin1.jpg`)
             
             q - Quit Lab 6 Demo
-        -------------------------------------------------------------
+-----------------------------------------------------------------------
             """
         )
 
@@ -222,35 +230,41 @@ def lab6Menu():
             img = getImgData("lab6")
             if img is None:
                 houghLineDemo()
+            elif img == -1:
+                continue
             else:
                 houghLineDemo(img)
-                
+
         elif demoChoice == "2":
             print("Live Capture Hough Line Demo")
             print("Error") if liveCaptureHoughLine(sf=0.3) == -1 else None
-            
+
         elif demoChoice == "3":
             print("Hough Circle Demo with Image")
 
             img = getImgData("lab6")
             if img is None:
                 houghCircleDemo()
+            elif img == -1:
+                continue
             else:
                 houghCircleDemo(img)
-                
+
         elif demoChoice == "4":
             print("Hough Circle with Variable Threshold Demo")
 
             img = getImgData("lab6")
             if img is None:
                 houghCircleVarDemo()
+            elif img == -1:
+                continue
             else:
                 houghCircleVarDemo(img)
-                
+
         elif demoChoice == "q":
             print("Exiting Lab 6 Demo...")
             break
-        
+
         else:
             print("Invalid Input!!")
 
@@ -260,6 +274,7 @@ def lab7Menu():
         clearTerminal()
         print(
             """
+-----------------------------------------------------------------------
         Lab 7 - Default Corner Detection, harris Corner Detection and Contour Detection
         
         Options:
@@ -274,6 +289,7 @@ def lab7Menu():
             7 - Live Capture Contours Demo
             
             q - Quit Lab 7 Demo
+-----------------------------------------------------------------------
             """
         )
 
@@ -285,57 +301,67 @@ def lab7Menu():
             img = getImgData("lab7")
             if img is None:
                 cornerDetectionDemo()
+            elif img == -1:
+                continue
             else:
                 cornerDetectionDemo(img)
-                
+
         elif demoChoice == "2":
             print("Corner Detection with Variable Threshold Demo")
 
             img = getImgData("lab7")
             if img is None:
                 cornerDetectionVarDemo()
+            elif img == -1:
+                continue
             else:
                 cornerDetectionVarDemo(img)
-                
+
         elif demoChoice == "3":
             print("Live Capture Corner Detection Demo")
             liveCaptureCornerDetection()
-            
+
         elif demoChoice == "4":
             print("Harris Corner Detection Demo with Image")
 
             img = getImgData("lab7")
             if img is None:
                 harrisCornerDetectionDemo()
+            elif img == -1:
+                continue
             else:
                 harrisCornerDetectionDemo(img)
-                
+
         elif demoChoice == "5":
             print("Harris Corner Detection with Variable Threshold Demo")
 
             img = getImgData("lab7")
             if img is None:
                 harrisCornerVarDemo()
+            elif img == -1:
+                continue
             else:
                 harrisCornerVarDemo(img)
-                
+
         elif demoChoice == "6":
             print("Contour Detection Demo with Image")
 
             img = getImgData("lab7")
             if img is None:
                 contourDemo()
+            elif img == -1:
+                continue
             else:
                 contourDemo(img)
-                
+
         elif demoChoice == "7":
             print("Live Capture Contours Demo")
             liveCaptureContours()
-            
+
         elif demoChoice == "q":
             print("Exiting Lab 7 Demo...")
             break
-        
+
         else:
             print("Invalid Input!!")
 
@@ -350,17 +376,25 @@ def getImgData(dirName: str):
     imgList = os.listdir(os.path.join("imgs", dirName))
 
     # Diplay Menu
+    print("------------------------------------------------------")
+    print("\td - Use default image")
+    print("\tq - Quit to previous menu\n")
+    print("Image list:")
     count = 1
     for img in imgList:
-        print(f"{count} - {img}")
+        print(f"\t{count} - {img}")
         count += 1
-    print("d - Use default image")
+
+    print("------------------------------------------------------")
 
     while True:
         imgChoice = input("Enter image of choice: ").lower()
 
         if imgChoice == "d" or imgChoice == "":
             return None
+
+        if imgChoice == "q":
+            return -1
 
         imgChoice = int(imgChoice)
         print(f"input choice: {imgChoice}, length of array: {len(imgList)}")

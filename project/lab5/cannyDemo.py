@@ -64,6 +64,11 @@ def autoCanny(fileName: str = "plate.jpg"):
     if img is None:
         print(f"Error: Could not read/Open image, {fileName}")
         exit(-1)
+        
+    h, w, _ = img.shape
+    
+    if (h> 1000 or w > 1000):
+        img = cv.resize(img, None, fx=0.4, fy=0.5, interpolation=cv.INTER_LINEAR)
 
     img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     img = cv.GaussianBlur(img, (3, 3), 0)
@@ -80,7 +85,7 @@ def autoCanny(fileName: str = "plate.jpg"):
 
     cv.imshow("original", img)
 
-    cv.imshow("Edges", np.hstack([wide, tight, auto]))
+    cv.imshow("Edges, wide | Tight | Auto", np.hstack([wide, tight, auto]))
     cv.waitKey(0)
     cv.destroyAllWindows()
 
