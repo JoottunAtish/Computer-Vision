@@ -11,14 +11,14 @@ import cv2 as cv
 import numpy as np
 import os
 
-def imageStitchDemo(dirName: str = "bryce_left", sf: float = 0.4):
+def imageStitchDemo(dirName: str = "scottdale_left", sf: float = 0.4):
     '''
     Using openCV's Stitcher_create(), it stitches 2 or more images given their features (corners and edges).
     '''
     path = os.path.join("imgs", "stitch", dirName)
 
     if not os.path.isdir(path):
-        print(f"Folder `{dirName}` does not exist in `imgs/stitch`.")
+        print(f"Folder `{dirName}` does not exist in `imgs\stitch`.")
         return -1
 
     # Load and resize all images
@@ -47,9 +47,12 @@ def imageStitchDemo(dirName: str = "bryce_left", sf: float = 0.4):
     if status != cv.Stitcher_OK:
         print(f"Stitching failed (error code: {status})")
         print("No common feature found.")
+        cv.destroyAllWindows()
         return -1
 
 
     cv.imshow("Stitched Panorama", stitched)
     cv.waitKey(0)
     cv.destroyAllWindows()
+
+# imageStitchDemo("scottdale_left")

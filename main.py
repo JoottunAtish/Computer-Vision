@@ -288,6 +288,8 @@ def lab7Menu():
             6 - Contour Detection Demo (default image, `furniture.jpg`)
             7 - Live Capture Contours Demo
             
+            8 - Image Stitching Demo (default images directory, scottdale_left)
+            
             q - Quit Lab 7 Demo
 -----------------------------------------------------------------------
             """
@@ -357,7 +359,18 @@ def lab7Menu():
         elif demoChoice == "7":
             print("Live Capture Contours Demo")
             liveCaptureContours()
-
+            
+        elif demoChoice == "8":
+            print("Image Stitching...")
+            dir = getImgData("stitch")
+            if dir is None:
+                imageStitchDemo()
+                continue
+            elif dir == -1:
+                continue
+            else:
+                imageStitchDemo(dir)
+            
         elif demoChoice == "q":
             print("Exiting Lab 7 Demo...")
             break
@@ -377,7 +390,7 @@ def getImgData(dirName: str):
 
     # Diplay Menu
     print("------------------------------------------------------")
-    print("\td - Use default image")
+    print("\td or "" - Use default image")
     print("\tq - Quit to previous menu\n")
     print("Image list:")
     count = 1
