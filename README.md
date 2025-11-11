@@ -29,13 +29,18 @@ You must have the **UV project manager** installed on your system.
 
 ### 1\. Setup UV (Windows)
 
-Run the following command in your PowerShell to install the UV installer:
+Run the following command in your terminal to install the UV installer:
 
 ```bash
+# Windows
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-> **Note:** For non-Windows environments (Linux/macOS), please refer to the official [UV documentation](https://astral.sh/uv) for the appropriate installation command.
+```bash
+# On macOS and Linux.
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
 
 ### 2\. Install Dependencies
 
