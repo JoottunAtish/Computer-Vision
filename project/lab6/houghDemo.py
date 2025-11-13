@@ -64,6 +64,8 @@ def houghLineDemo(fileName: str = "sudoku1.png"):
                 b = math.sin(theta)
                 x0 = a * rho
                 y0 = b * rho
+                # 1000 is just an arbitrary number added/subtracted so that th line extends far out the image.
+                # So it just shows a line not line segments.
                 pt1 = (int(x0 + 1000 * (-b)), int(y0 + 1000 * (a)))
                 pt2 = (int(x0 - 1000 * (-b)), int(y0 - 1000 * (a)))
 

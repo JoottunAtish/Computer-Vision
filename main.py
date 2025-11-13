@@ -7,6 +7,9 @@ from project.lab7.imageStitchDemo import *
 import os
 
 
+def Test():
+   cannydemo() 
+
 def main():
 
     while True:
@@ -428,3 +431,4 @@ def clearTerminal():
 
 if __name__ == "__main__":
     main()
+    # Test()
