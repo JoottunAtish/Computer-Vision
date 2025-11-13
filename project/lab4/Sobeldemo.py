@@ -1,4 +1,4 @@
-'''
+"""
 ## @File Sobeldemo.py
 
 Lab 4 - Sobel Tranformation for Edge Detection
@@ -8,7 +8,7 @@ Lab 4 - Sobel Tranformation for Edge Detection
     - sobelDemo(fileName: str, ksize: int, weight: int)
     - liveCameraSobel(sf: float)
     - liveCameraLapacian(sf: float)
-'''
+"""
 
 import cv2 as cv
 import numpy as np
@@ -24,19 +24,20 @@ def sobelDemo(fileName: str = "Lena.jpg", ksize: int = 3, weight: int = 0.5):
     if img is None:
         print(f"Error reading image, `{fileName}`")
         return None
-   
+
+    # Resize for large images
     h, w, _ = img.shape
-    
-    
-    if (w > 1000 or h > 1000):
+
+    if w > 1000 or h > 1000:
         print(f"height: {h}\nWidth: {w}")
-        img = cv.resize(img, None, fx=0.2, fy=0.2, interpolation=cv.INTER_LINEAR) 
+        # scale factor is 0.4, Image size will be reduced to 40%
+        img = cv.resize(img, None, fx=0.4, fy=0.4, interpolation=cv.INTER_LINEAR)
 
     cv.imshow(f"Default Image, {fileName}", img)
 
     ## Pre-Processing stage
     img = cv.GaussianBlur(img, (3, 3), 0)
-    
+
     img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     cv.imshow(f"Grayscale of {fileName}", img)
 
@@ -63,10 +64,14 @@ def sobelDemo(fileName: str = "Lena.jpg", ksize: int = 3, weight: int = 0.5):
     )
 
     # Convert the gradient into an image for display.
+
+    # handles the negative values by converting to absolute value
     abs_grad_x = cv.convertScaleAbs(gradient_x)
     abs_grad_y = cv.convertScaleAbs(gradient_y)
 
+    # Combine both gradients equally with weight = 0.5
     edgeImg = cv.addWeighted(abs_grad_x, weight, abs_grad_y, weight, 0)
+    
     cv.imshow(f"edge detected, {fileName}", edgeImg)
 
     cv.waitKey(0)  # Wait for an input
@@ -74,9 +79,9 @@ def sobelDemo(fileName: str = "Lena.jpg", ksize: int = 3, weight: int = 0.5):
 
 
 def liveCameraSobel(sf: float = 0.5):
-    '''
+    """
     Live capture and sobel tranformation for real-time edge detection
-    '''
+    """
     capture = cv.VideoCapture(0)
 
     if not capture.isOpened():
@@ -140,13 +145,13 @@ def liveCameraLaplacian(sf: float = 0.5):
 
         gray_frame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
         frame_eq = cv.equalizeHist(gray_frame)
-        
+
         laplacian = cv.Laplacian(frame_eq, cv.CV_64F, ksize=1)
-        
+
         cv.imshow("Original", gray_frame)
         cv.imshow("equilised image", frame_eq)
         cv.imshow("Lacplacian", laplacian)
-        
+
         if cv.waitKey(1) & 0xFF == ord("q"):
             capture.release()
             cv.destroyAllWindows()

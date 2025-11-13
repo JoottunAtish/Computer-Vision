@@ -138,15 +138,23 @@ def liveCaptureCornerDetection(sf: float = 0.4):
 def harrisCornerDetectionDemo(fileName: str = "chessboard.jpg"):
     
     img = cv.imread(f"imgs\lab7\{fileName}")
+    if img is None:
+        print(f"Error: Could not read/open image, {fileName}")
+        return None
     
     img_cpy = img.copy()
     
     img_cpy = cv.cvtColor(img_cpy, cv.COLOR_BGR2GRAY)
     img_cpy = np.float32(img_cpy)
 
-    img_corner = cv.cornerHarris(img_cpy, 2, 3, 0.04)
-    
-    img_corner = cv.dilate(img_corner, None)
+    img_corner = cv.cornerHarris(
+        img_cpy,    # Source - GrayScale image
+        2,          # Block size - widow size
+        3,          # ksize - size of the Sobel kernel
+        0.04        # K - The empirical constant 0.04 - 0.06
+    )
+
+    img_corner = cv.dilate(img_corner, None)    # Highlight the corners (makes bright regions more visible)
     
     img[img_corner> 0.01*img_corner.max()] = [0, 0, 225]
     
@@ -199,6 +207,12 @@ def contourDemo(fileName: str = "furniture.jpg"):
         print(f"Error: Could not read/open Image, {fileName}")
         return -1
 
+    h, w, _ = img.shape
+    
+    if (w > 1000 or h > 1000):
+        print(f"height: {h}\nWidth: {w}")
+        img = cv.resize(img, None, fx=0.4, fy=0.4, interpolation=cv.INTER_LINEAR) 
+    
     windowName = "Contour Detector"
     cv.namedWindow(windowName, cv.WINDOW_AUTOSIZE)
 

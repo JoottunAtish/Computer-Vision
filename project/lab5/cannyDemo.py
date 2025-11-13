@@ -17,7 +17,12 @@ import numpy as np
 
 def cannydemo(fileName: str = "plate.jpg"):
     img = cv.imread(f"imgs\lab5\{fileName}")
+    if img is None:
+        print(f"Error: Could Not open image, {fileName}")
+        return None
+    
     edges = cv.Canny(img, 150, 225, L2gradient=False)
+    
     plt.imshow(edges, cmap="gray")
     plt.show()
 
@@ -29,11 +34,11 @@ def cannyVarVal(fileName: str = "plate.jpg"):
     img = cv.imread(f"imgs\lab5\{fileName}")
     if img is None:
         print(f"Error: Could Not open image, {fileName}")
+        return None
 
+    # Creating a named window to store the trackbars
     windowName = "canny_edge"
     cv.namedWindow(windowName, cv.WINDOW_AUTOSIZE)
-
-    cv.imshow("Original Image", img)
 
     ## Define trackbars
     cv.createTrackbar("minValue", windowName, 0, 500, empty)
@@ -47,6 +52,7 @@ def cannyVarVal(fileName: str = "plate.jpg"):
 
         canny_edge = cv.Canny(img, min_val, max_val)
 
+        cv.imshow("Original Image", img)
         cv.imshow("Canny Edges", canny_edge)
 
         if cv.waitKey(1) & 0xFF == ord("q"):
@@ -58,7 +64,7 @@ def autoCanny(fileName: str = "plate.jpg"):
     """
     Automatically detect the threshold value using wide threshold and tight threshold.
     """
-    sigma = 0.1
+    sigma = 0.3
     img = cv.imread(f"imgs\lab5\{fileName}")
 
     if img is None:
@@ -68,7 +74,7 @@ def autoCanny(fileName: str = "plate.jpg"):
     h, w, _ = img.shape
     
     if (h> 1000 or w > 1000):
-        img = cv.resize(img, None, fx=0.4, fy=0.5, interpolation=cv.INTER_LINEAR)
+        img = cv.resize(img, None, fx=0.4, fy=0.4, interpolation=cv.INTER_LINEAR)
 
     img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     img = cv.GaussianBlur(img, (3, 3), 0)
