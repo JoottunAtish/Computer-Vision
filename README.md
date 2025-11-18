@@ -14,7 +14,7 @@ These labs cover essential topics in image processing and feature detection:
       * Focus: Implementing the **Canny algorithm**, a multi-stage approach for optimal edge detection.
   * **Lab 6: Hough Transformation**
       * Focus: Utilizing the **Hough Transform** for detecting **lines and circles** in images.
-  * **Lab 7: Harris Corner Detection and Contour detection**
+  * **Lab 7: Harris Corner Detection, Contour detection and Image Stitching**
       * Focus: Implementing the **Harris algorithm** to identify distinctive **corners** (interest points) in an image.
 
 -----
