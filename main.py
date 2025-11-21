@@ -33,7 +33,7 @@ def main():
             additionalDemo()
 
         elif labChoice == "q":
-            print("Exiting program...")
+            clearTerminal()
             break
 
         else:
