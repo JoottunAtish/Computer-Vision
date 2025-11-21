@@ -28,6 +28,9 @@ def main():
         elif labChoice == "4":
             print("Lab 7 Choosen")
             lab7Menu()
+        elif labChoice == "5":
+            print("Additional Demos...")
+            additionalDemo()
 
         elif labChoice == "q":
             print("Exiting program...")
@@ -79,10 +82,13 @@ def MainMenuList():
     Computer Vision Main Menu Lab 4 - 7
     
     Options:  
-        1 - Sobel and Laplacian Demo                                                (Lab 4)
-        2 - Canny Demo                                                              (Lab 5)
-        3 - Hough Line and Circle Demo                                              (Lab 6)
-        4 - Corner Detection, Harris Corner Detection and Image stitching Demo      (Lab 7)
+        1 - Sobel and Laplacian                             (Lab 4)
+        2 - Canny                                           (Lab 5)
+        3 - Hough Line and Circle                           (Lab 6)
+        4 - Corner Detection, Harris Corner Detection       (Lab 7)
+    
+    Extra Demonstration for fun:
+        5 - Contour Detection and Image  Stitching          (Additional)
         
         q - Quit Program
 -----------------------------------------------------------------------
@@ -285,11 +291,6 @@ def lab7Menu():
             4 - Harris Corner Detection Demo (default image, `chessboard.jpg`)
             5 - Harris Corner Detection with Variable Threshold Values Demo (default image, `chessboard.jpg`)
             
-            6 - Contour Detection Demo (default image, `furniture.jpg`)
-            7 - Live Capture Contours Demo
-            
-            8 - Image Stitching Demo (default images directory, scottdale_left)
-            
             q - Quit Lab 7 Demo
 -----------------------------------------------------------------------
             """
@@ -344,32 +345,6 @@ def lab7Menu():
                 continue
             else:
                 harrisCornerVarDemo(img)
-
-        elif demoChoice == "6":
-            print("Contour Detection Demo with Image")
-
-            img = getImgData("lab7")
-            if img is None:
-                contourDemo()
-            elif img == -1:
-                continue
-            else:
-                contourDemo(img)
-
-        elif demoChoice == "7":
-            print("Live Capture Contours Demo")
-            liveCaptureContours()
-            
-        elif demoChoice == "8":
-            print("Image Stitching...")
-            dir = getImgData("stitch")
-            if dir is None:
-                imageStitchDemo()
-                continue
-            elif dir == -1:
-                continue
-            else:
-                imageStitchDemo(dir)
             
         elif demoChoice == "q":
             print("Exiting Lab 7 Demo...")
@@ -377,6 +352,62 @@ def lab7Menu():
 
         else:
             print("Invalid Input!!")
+
+
+def additionalDemo():
+    while True:
+        clearTerminal()
+        print(
+            """
+-----------------------------------------------------------------------
+        Additional - Contour Detection and Image Stitching
+        
+        Options:
+            1 - Contour Detection Demo (default image, `furniture.jpg`)
+            2 - Live Capture Contour Demo
+            
+            3 - Image Stitching Demo (default Image list, `scottdale_left`)
+        
+            
+            q - Quit Additional Demo
+-----------------------------------------------------------------------
+            """   
+        )
+        demoChoice = input("Enter your choice: ").lower()
+        
+        if demoChoice == "1":
+            print("Contour Detection Demo with Image")
+
+            img = getImgData("lab7")
+            if img is None:
+                contourDemo()
+            elif img == -1:
+                return
+            else:
+                contourDemo(img)
+                
+        elif demoChoice == "2":
+            print("Live Capture Contours Demo")
+            liveCaptureContours()
+            
+        elif demoChoice == "3":
+            print("Image Stitching...")
+            dir = getImgData("stitch")
+            
+            if dir is None:
+                imageStitchDemo()
+            elif dir == -1:
+                return
+            else:
+                imageStitchDemo(dir)
+        
+        elif demoChoice == "q":
+            print("Exiting Additional Demo...")
+            return
+        
+        else:
+            print("Invalid Input!!")
+
 
 
 def getImgData(dirName: str):
